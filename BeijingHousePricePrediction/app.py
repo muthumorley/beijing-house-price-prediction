@@ -20,24 +20,68 @@ TRADE_YEAR = 2017
 # ======================================================
 
 st.set_page_config(
-    page_title="Beijing House Price Predictor",
+    page_title="Beijing Property Price Prediction | XGBoost + Streamlit",
     page_icon="🏠",
     layout="wide"
 )
 
-st.title("🏠 Beijing House Price Prediction")
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background: linear-gradient(135deg, #f7f9fc 0%, #eef4f8 100%);
+    }
+    [data-testid="stSidebar"] {
+        background: #102a43;
+    }
+    [data-testid="stSidebar"] * {
+        color: #f7fbff;
+    }
+    [data-testid="stMetric"] {
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px solid #d9e2ec;
+        border-radius: 8px;
+        padding: 1rem;
+    }
+    .hero {
+        background: #102a43;
+        border-radius: 8px;
+        color: #f7fbff;
+        padding: 1.5rem 1.75rem;
+        margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+        color: #f7fbff;
+        margin: 0 0 0.35rem;
+    }
+    .hero p {
+        color: #d9e2ec;
+        margin: 0;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
-st.markdown("""
-Predict Beijing house prices using a trained **XGBoost Machine Learning Model**.
+st.markdown(
+    """
+    <section class="hero">
+        <h1>Beijing Property Price Prediction | XGBoost + Streamlit</h1>
+        <p>Explore an XGBoost estimate from a few practical property details.</p>
+    </section>
+    """,
+    unsafe_allow_html=True,
+)
 
-Fill in the property details from the sidebar and click **Predict House Price**.
-""")
+st.caption("Model: XGBoost Regressor  •  Currency: Chinese yuan (RMB)  •  Reference year: 2017")
 
 # ======================================================
 # Sidebar
 # ======================================================
 
 st.sidebar.header("🏡 Property Details")
+st.sidebar.caption("Adjust the inputs, then run the estimate.")
+st.sidebar.markdown("**Size and layout**")
 
 square = st.sidebar.number_input(
     "Square Area (m²)",
@@ -60,6 +104,8 @@ bath = st.sidebar.slider(
     1
 )
 
+st.sidebar.markdown("**Building details**")
+
 construction = st.sidebar.number_input(
     "Construction Year",
     min_value=1950,
@@ -73,6 +119,8 @@ floor = st.sidebar.number_input(
     max_value=60,
     value=10
 )
+
+st.sidebar.markdown("**Location and amenities**")
 
 community = st.sidebar.number_input(
     "Community Average Price",
@@ -273,6 +321,17 @@ if predict:
         hide_index=True,
         use_container_width=True
     )
+else:
+    overview_col1, overview_col2, overview_col3 = st.columns(3)
+
+    with overview_col1:
+        st.metric("Area range", "20–500 m²")
+    with overview_col2:
+        st.metric("Districts", "13 covered")
+    with overview_col3:
+        st.metric("Prediction model", "XGBoost")
+
+    st.info("Choose property details in the sidebar and select **Predict House Price** to see the estimate and property summary.")
 
 # ======================================================
 # Footer
@@ -281,7 +340,9 @@ if predict:
 st.markdown("---")
 
 st.markdown("""
-### 🏠 Beijing House Price Prediction System
+### Beijing Property Price Prediction | XGBoost + Streamlit
+
+**Project Type:** Machine Learning Project
 
 **Machine Learning Model:** XGBoost Regressor
 
