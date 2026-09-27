@@ -77,11 +77,11 @@ The notebook is Colab-oriented rather than a turnkey local training script. Its 
 | [`.github/workflows/deploy-eb.yml`](.github/workflows/deploy-eb.yml) | Repository-root AWS deployment workflow |
 | [`BeijingHousePricePrediction/.ebextensions/`](BeijingHousePricePrediction/.ebextensions/) and [`BeijingHousePricePrediction/.platform/`](BeijingHousePricePrediction/.platform/) | Elastic Beanstalk and nginx configuration |
 
-The repository also contains a root-level `linear.py` sample plot and two plot images; they are separate from the house-price app. There is no database or application API in the inference path.
+There is no database or application API in the inference path.
 
 ## Deployment Configuration
 
-The active workflow runs on pushes to `main` or by manual dispatch. It expects these GitHub Actions secrets: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN`, and `AWS_REGION`. It packages files from `BeijingHousePricePrediction/`, uploads the package to S3, and requests an Elastic Beanstalk environment update. Deployment requires valid AWS credentials and the referenced AWS resources. The nested `BeijingHousePricePrediction/.github/workflows/deploy-eb.yml` is marked as reference-only; GitHub Actions uses the workflow at the repository root.
+The repository-root workflow runs on pushes to `main` or by manual dispatch. It expects these GitHub Actions secrets: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN`, and `AWS_REGION`. It packages files from `BeijingHousePricePrediction/`, uploads the package to S3, and requests an Elastic Beanstalk environment update. Deployment requires valid AWS credentials and the referenced AWS resources.
 
 ## Limitations and Security
 
